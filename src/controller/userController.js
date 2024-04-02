@@ -214,7 +214,25 @@ const getFilteredUser = async(req,res,next)=>{
           { available: availabilty=="Available"?true:false},
         ],
       })
-    }else{
+    }else if(!name && domain && gender && availabilty){
+      users = await User.find({
+        $and: [
+          { gender },
+          { domain },
+          { available: availabilty=="Available"?true:false},
+        ],
+      })
+    }
+    else if(name && domain && gender && !availabilty){
+      users = await User.find({
+        $and: [
+          { gender },
+          { domain },
+          { first_name:name},
+        ],
+      })
+    }
+    else{
 
     users = await User.find({
       $and: [
