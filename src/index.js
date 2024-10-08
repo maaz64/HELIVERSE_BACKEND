@@ -2,7 +2,7 @@ require('dotenv').config();
 const app = require('./app');
 const connectDB = require('./db/mongodb');
 
-const Port = 8080 || process.env.Port;
+const Port = process.env.Port || 8080;
 
 connectDB().then(()=>{
     app.listen(Port,(error)=>{
